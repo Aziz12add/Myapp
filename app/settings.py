@@ -1,24 +1,22 @@
- os
-from pydantic_settings import BaseSettings, SettingsConfigDict
+import os
 from typing import List
+
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
-        extra="ignore"
+        extra="ignore",
     )
 
-    # Database
     DATABASE_URL: str = ""
 
-    # JWT
-    SECRET_KEY: str = "CHANGE_ME_TO_A_LONG_RANDOM_STRING"
+    SECRET_KEY: str
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7
 
-    # IP Pool
     IP_POOL: List[str] = [
         "203.0.113.1",
         "203.0.113.2",
@@ -29,7 +27,6 @@ class Settings(BaseSettings):
 settings = Settings()
 
 
-# Build DATABASE_URL from Wasmer DB_* variables if DATABASE_URL is not provided
 if not settings.DATABASE_URL:
     db_host = os.getenv("DB_HOST")
     db_port = os.getenv("DB_PORT")
@@ -46,3 +43,4 @@ if not settings.DATABASE_URL:
         raise RuntimeError(
             "Database configuration is missing. "
             "Set DATABASE_URL or all DB_* variables."
+        )
