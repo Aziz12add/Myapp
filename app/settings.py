@@ -1,4 +1,4 @@
-import os
+ os
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import List
 
@@ -46,4 +46,3 @@ if not settings.DATABASE_URL:
         raise RuntimeError(
             "Database configuration is missing. "
             "Set DATABASE_URL or all DB_* variables."
-        )
