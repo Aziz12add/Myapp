@@ -6,15 +6,11 @@ from . import models, schemas, crud, auth, config_gen
 from .database import engine, get_db, Base
 from .auth import get_current_user
 
-# ایجاد جدول‌ها
-Base.metadata.create_all(bind=engine)
-
 app = FastAPI(
     title="Myapp Panel",
     description="پنل مدیریت VPN ساده",
     version="1.0.0"
 )
-
 
 # -------------------- Auth --------------------
 
