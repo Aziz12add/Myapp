@@ -1,8 +1,0 @@
-kind: wasmer.io/App.v0
-name: myapp-panel
-owner: Aziz12add/Myapp
-package: .
-env:
-  PORT: "8000"
-
-# برای پایتون واسمر خودش تشخیص میده، نیاز به Dockerfile نیست
